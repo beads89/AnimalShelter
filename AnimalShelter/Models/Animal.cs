@@ -9,7 +9,8 @@ namespace AnimalShelter.Models
     public int AnimalId {get; set;}
     public string Breed {get; set;}
     public string Date {get; set;}
-
+    public int ShelterId {get; set;}
+    public virtual Shelter Shelter {get; set;}
     //constructor
   }
 }

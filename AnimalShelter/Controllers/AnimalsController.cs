@@ -2,6 +2,8 @@ using Microsoft.AspNetCore.Mvc;
 using AnimalShelter.Models;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
+
 
 /*
 add all the other properties - form, details
@@ -29,14 +31,14 @@ namespace AnimalShelter.Controllers
 
     public ActionResult Index()
     {
-      List<Animal> model = _db.Animals.ToList();
+      List<Animal> model = _db.Animals.Include(animal => animal.Shelter).ToList();
 
       //call the OrderBy function, use ToList, put in a list done
       //add a switch statement - need an input, assign different sorted arrays based on that
       //get user input for how to sort it - index 
-      List<Animal> sorted = model.OrderBy(animal => animal.Age).ToList();
+      // List<Animal> sorted = model.OrderBy(animal => animal.Age).ToList();
       //add logic here or make a static function in Animal class
-      return View(sorted);
+      return View(model);
     }
 
     public ActionResult Create()
@@ -47,7 +49,7 @@ namespace AnimalShelter.Controllers
     [HttpPost]
     public ActionResult Create(Animal animal)
     {
-      //the item used to be created here - constructor
+      //the animal used to be created here - constructor
       _db.Animals.Add(animal);
       _db.SaveChanges();
       return RedirectToAction("Index");
@@ -72,6 +74,21 @@ namespace AnimalShelter.Controllers
       _db.Entry(animal).State = EntityState.Modified;
       _db.SaveChanges();
       return RedirectToAction("Index");
+    }
+
+    public ActionResult Delete(int id)
+    {
+        Animal animalToDelete = _db.Animals.FirstOrDefault(animal => animal.AnimalId == id);
+        return View(animalToDelete);
+    }
+
+    [HttpPost, ActionName("Delete")]
+    public ActionResult DeleteConfirmed(int id)
+    {
+        Animal animalToDelete = _db.Animals.FirstOrDefault(animal => animal.AnimalId == id);
+        _db.Animals.Remove(animalToDelete);
+        _db.SaveChanges();
+        return RedirectToAction("Index");
     }
   }
 }
