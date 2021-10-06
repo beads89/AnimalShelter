@@ -1,0 +1,40 @@
+cheeseSplitter(input) => {
+
+
+newArr = input.ToSplit();
+lengthcounter = 0;
+for(let i = 0; i>newArr.length; i++){
+  if (i = 0){
+    lengthcounter = newArr[i.length];
+  } else if(lengthcounter > newArr[i.length])
+    lengthcounter = newArr[i.length];
+    }
+
+  } return lengthcounter;
+}
+syntax
+
+cheeseSplitter(input) => {
+
+//    if (validation) return "error"
+
+  //initialize variables - scope
+  const newArr = input.split(" ");
+  let currentShortest = newArr[0].length;
+
+  //write a for loop, 
+  for(let i = 0; i < newArr.length; i++){
+    //iterate over each element checking the length,
+    if(lengthcounter > newArr[i].length) {
+      //update the temp variable if it's shorter
+      lengthcounter = newArr[i].length;
+    }
+  }
+  // return shortest length
+  return lengthcounter;
+}
+
+scope of lengthcounter ++
+
+
+}
