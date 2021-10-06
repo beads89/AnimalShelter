@@ -25,6 +25,16 @@
   @Html.LabelFor(model => model.Date)
   @* @Html.TextBoxFor(model => model.Date) *@
   @Html.TextBoxFor(model => model.Date, "{0:d MMM yyyy}", new { type = "date" })
+
+  @* ViewBag.ShelterId = new SelectList(_db.Shelters, "ShelterId", "Name"); *@
+  @Html.LabelFor(model => model.Shelter)
+  @Html.DropDownList("ShelterId") //User sees a dropdown of names, id connected with whatever name they select is set as the ShelterId of the new animal. 
+  @* <select>
+    @foreach(Shelter shelter in _db.Shelters.ToList())
+    {
+      <option value="@shelter.ShelterId">@shelter.Name</option>
+    }
+  </select> *@
   <input type="submit" value="Add"/>
 }
 

@@ -3,6 +3,7 @@ using AnimalShelter.Models;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 
 /*
@@ -43,6 +44,9 @@ namespace AnimalShelter.Controllers
 
     public ActionResult Create()
     {
+      
+      ViewBag.ShelterId = new SelectList(_db.Shelters, "ShelterId", "Name");
+
       return View();
     }
 
@@ -65,6 +69,9 @@ namespace AnimalShelter.Controllers
     public ActionResult Edit(int id)
     {
       Animal animalToEdit = _db.Animals.FirstOrDefault(animal => animal.AnimalId == id);
+      
+      ViewBag.ShelterId = new SelectList(_db.Shelters, "ShelterId", "Name");
+
       return View(animalToEdit);
     }
 

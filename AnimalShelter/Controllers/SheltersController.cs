@@ -4,20 +4,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 
-
-/*
-add all the other properties - form, details
-date - automatic setting - constructor - date input - placeholder set to current time as default
-filter by 
-  breed
-  type
-  date
-  age
-  name
-
-
-*/
-
 namespace AnimalShelter.Controllers
 {
   public class SheltersController : Controller
@@ -29,17 +15,25 @@ namespace AnimalShelter.Controllers
       _db = db;
     }
 
-    // public ActionResult Index()
-    // {
-    //   List<Animal> model = _db.Animals.ToList();
+    public ActionResult Index()
+    {
+      List<Shelter> model = _db.Shelters.ToList();
+      //Include(shelter => shelter.Shelter).
+      return View(model);
+    }
 
-    //   //call the OrderBy function, use ToList, put in a list done
-    //   //add a switch statement - need an input, assign different sorted arrays based on that
-    //   //get user input for how to sort it - index 
-    //   List<Animal> sorted = model.OrderBy(animal => animal.Age).ToList();
-    //   //add logic here or make a static function in Animal class
-    //   return View(sorted);
-    // }
+    public ActionResult Create()
+    {
+      return View();
+    }
+
+    [HttpPost]
+    public ActionResult Create(Shelter shelter)
+    {
+      _db.Shelters.Add(shelter);
+      _db.SaveChanges();
+      return RedirectToAction("Index");
+    }
 
     // public ActionResult Create()
     // {

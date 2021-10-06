@@ -6,6 +6,7 @@ namespace AnimalShelter.Controllers
   {
     // [HttpGet("/")]
     public ActionResult Index() { 
+      ViewBag.MyFavoriteColor = "green";
       return View(); 
     }
   }
